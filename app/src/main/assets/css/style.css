@@ -1,0 +1,50 @@
+@font-face {
+    font-family: 'Roboto';
+    src: url('file:///android_asset/font/bangla_font.ttf');
+}
+
+body {
+    font-family: 'Roboto';
+    background: #BFDBE8;
+}
+.header_img{
+    width: 100%;
+    height: fit-content;
+}
+
+h1{
+    font-size: 1.5rem;
+    text-align: center;
+    margin-top: 1rem;
+    margin-bottom: 3rem;
+    border-bottom: 2px solid green;
+    padding-bottom: 5px;
+}
+h4{
+    text-align: center;
+    border: 1px solid;
+    padding: 10px;
+}
+div.bg{
+    background: #C0C0C0;
+    padding: 5px;
+    border: 1px double;
+    font-size: 1.2rem;
+    text-align: justify;
+}
+th,
+td {
+    text-align: left;
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+th {
+   text-align: center;
+}
+p{
+    font-size: 1.2rem;
+    text-align: justify;
+}
+span{
+    text-align: center;
+}
