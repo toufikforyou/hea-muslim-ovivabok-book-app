@@ -1,4 +1,4 @@
-name: GitHub Release Workflow
+name: GitHub Release Automation
 
 on:
   push:
