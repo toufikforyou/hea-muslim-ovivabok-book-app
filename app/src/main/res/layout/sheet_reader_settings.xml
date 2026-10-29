@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="24dp"
+    android:paddingBottom="24dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/reader_settings"
+        android:textAppearance="?attr/textAppearanceTitleLarge"
+        android:textColor="?attr/colorOnSurface" />
+
+    <TextView
+        style="@style/Widget.App.InfoRowLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/reader_text_size" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/text_smaller"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="64dp"
+            android:layout_height="56dp"
+            android:contentDescription="@string/reader_text_smaller"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="অ−"
+            android:textSize="16sp"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            android:id="@+id/text_size_value"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textAppearance="?attr/textAppearanceTitleMedium"
+            android:textColor="?attr/colorOnSurface"
+            tools:text="১০০%" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/text_larger"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="64dp"
+            android:layout_height="56dp"
+            android:contentDescription="@string/reader_text_larger"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="অ+"
+            android:textSize="22sp"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+
+    <TextView
+        style="@style/Widget.App.InfoRowLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/reader_page_color" />
+
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:id="@+id/page_theme_toggle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:selectionRequired="true"
+        app:singleSelection="true">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/page_light"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:minHeight="52dp"
+            android:text="@string/reader_theme_light" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/page_sepia"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:minHeight="52dp"
+            android:text="@string/reader_theme_sepia" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/page_dark"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:minHeight="52dp"
+            android:text="@string/reader_theme_dark" />
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+</LinearLayout>
