@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches-ignore: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  probe:
+    name: Latest dependency versions
+    runs-on: ubuntu-latest
+    steps:
+      - name: Query Google Maven / Maven Central
+        run: |
+          latest() { curl -sSL "$1/maven-metadata.xml" | grep -oP '(?<=<version>)[^<]+' | grep -viE 'alpha|beta|rc|dev' | sort -V | tail -1; }
+          G=https://dl.google.com/dl/android/maven2
+          for a in com/android/tools/build/gradle com/google/android/material/material androidx/appcompat/appcompat \
+                   androidx/constraintlayout/constraintlayout androidx/navigation/navigation-fragment androidx/core/core-splashscreen \
+                   androidx/recyclerview/recyclerview androidx/activity/activity androidx/core/core androidx/preference/preference \
+                   androidx/test/ext/junit androidx/test/espresso/espresso-core androidx/webkit/webkit androidx/coordinatorlayout/coordinatorlayout; do
+            echo "$a = $(latest $G/$a)"; done
+          echo "junit = $(latest https://repo1.maven.org/maven2/junit/junit)"
+          echo "AGP all:"; curl -sSL $G/com/android/tools/build/gradle/maven-metadata.xml | grep -oP '(?<=<version>)[^<]+' | tail -15
+          ls /usr/local/lib/android/sdk/platforms /usr/local/lib/android/sdk/build-tools
