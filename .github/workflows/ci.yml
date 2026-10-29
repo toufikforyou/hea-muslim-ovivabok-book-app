@@ -79,16 +79,14 @@ jobs:
           arch: x86_64
           profile: pixel_6
           disable-animations: true
-          script: |
-            chmod +x gradlew
-            ./gradlew --no-daemon connectedDebugAndroidTest -Pandroid.injected.androidTest.leaveApksInstalledAfterRun=true
-            mkdir -p screens
-            PKG=$(grep -oE 'applicationId *=? *"[^"]+"' app/build.gradle* | grep -oE '"[^"]+"' | tr -d '"'); adb exec-out run-as $PKG tar c -C files screens | tar x -C .
+          script: bash .github/scripts/ui-test.sh
 
       - name: Upload screenshots
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: screenshots
-          path: screens/
+          path: |
+            screens/
+            app/build/reports/androidTests/
           if-no-files-found: warn
