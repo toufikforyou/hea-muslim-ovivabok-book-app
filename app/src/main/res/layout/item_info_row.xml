@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingVertical="12dp"
+    android:screenReaderFocusable="true"
+    tools:targetApi="p">
+
+    <TextView
+        android:id="@+id/info_label"
+        style="@style/Widget.App.InfoRowLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="বাবা" />
+
+    <TextView
+        android:id="@+id/info_value"
+        style="@style/Widget.App.InfoRowValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="হাফেজ হাজী মোহাম্মদ ঈসমাইল সাওদাগর (মৃত)" />
+</LinearLayout>

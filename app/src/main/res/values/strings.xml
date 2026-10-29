@@ -4,25 +4,86 @@
     <string-array name="chapter_lists_array">
         <item>লেখকের কথা</item>
         <item>নিজেদের সংশোধন করুন</item>
-        <item>অভিভাবকদের ব্যয়</item>
+        <item>অভিভাবকদের ব্যয়</item>
         <item>সন্তানদের চরিত্র গঠনে অভিভাবকদের ভূমিকা</item>
         <item>অভিভাবকদের অসতর্কতা</item>
         <item>সন্তানদের প্রতি অভিশাপ</item>
-        <item>অভিভাবকদের অসিয়ত</item>
+        <item>অভিভাবকদের অসিয়ত</item>
         <item>সন্তানদের শিক্ষা ও বিবাহ্</item>
-        <item>সন্তানদের নিয়ে স্বপ্ন</item>
+        <item>সন্তানদের নিয়ে স্বপ্ন</item>
         <item>এক নজরে</item>
     </string-array>
 
+    <!-- Navigation -->
+    <string name="nav_chapters">অধ্যায়</string>
+    <string name="nav_writer">লেখক পরিচিতি</string>
+    <string name="nav_about">অ্যাপ সম্পর্কে</string>
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.application@sopnolikhi.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+    <!-- Home -->
+    <string name="home_greeting">আসসালামু আলাইকুম</string>
+    <string name="home_greeting_subtitle">সন্তানকে সুন্দরভাবে গড়ে তোলার পথে একটু একটু করে পড়ুন।</string>
+    <string name="home_progress_title">আপনার পড়া</string>
+    <string name="home_progress_summary">%1$s টি অধ্যায়ের মধ্যে %2$s টি পড়া হয়েছে</string>
+    <string name="home_progress_done">আলহামদুলিল্লাহ! পুরো বইটি পড়া শেষ হয়েছে।</string>
+    <string name="home_start_reading">পড়া শুরু করুন</string>
+    <string name="home_continue_reading">পড়া চালিয়ে যান</string>
+    <string name="home_last_read">সর্বশেষ পড়েছেন: %1$s</string>
+    <string name="home_chapters_title">সব অধ্যায়</string>
+    <string name="chapter_label">অধ্যায় %1$s</string>
+    <string name="chapter_read">পড়া হয়েছে</string>
+    <string name="chapter_cover_description">%1$s অধ্যায়ের প্রচ্ছদ</string>
 
-    <string name="menu_writer_info">লেখক পরিচিতি</string>
-    <string name="menu_app_info">অ্যাপ্স সম্পর্কে</string>
-    <string name="app_writer_info"><![CDATA[নাম: শাহরিন ছিদ্দিকা।\n\nবাবা: হাফেজ হাজী মোহাম্মদ ঈসমাইল সাওদাগর (মৃত)\n\nমা: আয়েশা ছিদ্দিকা।\n\nভাই-বোন: তিন ভাই, বোন নেই।\n\nশিক্ষাগত যোগ‍্যতা- Hsc compelled And Bangladesh Islamic Online Madrasha student.\n\nস্থায়ী ঠিকানা: সাতকানিয়া চট্টগ্রাম।\nবর্তমান ঠিকানা: আনোয়ারা চট্টগ্রাম।\n\n ▪ আমার অনূভুতি গুলো পড়ে কারো যদি মতের অমিল হয় বা এই বিষয়ে কিছু বলার প্রয়োজন হয় তবে অবশ্যই যোগাযোগ করবেন ।👇\n\nhttps://www.facebook.com/tahamina.siddeka\n\nاَلسَّلاَمُ عَلَيْــــــــــــــــــــكُمْ\n\n🌺🌺আল্লাহ্ই সর্বাধিক জ্ঞানী।\nওয়া সাল্লাল্লাহু আলা নাবিয়‍্যিনা মুহাম্মাদ ওয়া আলিহি ওয়া সাহবিহি আজমাঈন।🌺🌺]]></string>
+    <!-- Reader -->
+    <string name="reader_position">অধ্যায় %1$s / %2$s</string>
+    <string name="reader_back">ফিরে যান</string>
+    <string name="reader_previous">আগের</string>
+    <string name="reader_next">পরের অধ্যায়</string>
+    <string name="reader_finish">শেষ</string>
+    <string name="reader_settings">পড়ার সেটিংস</string>
+    <string name="reader_text_size">লেখার আকার</string>
+    <string name="reader_text_smaller">লেখা ছোট করুন</string>
+    <string name="reader_text_larger">লেখা বড় করুন</string>
+    <string name="reader_text_size_value">%1$s%%</string>
+    <string name="reader_page_color">পাতার রং</string>
+    <string name="reader_theme_light">সাদা</string>
+    <string name="reader_theme_sepia">হালকা হলুদ</string>
+    <string name="reader_theme_dark">রাত</string>
+    <string name="reader_load_error">দুঃখিত, অধ্যায়টি খোলা যায়নি। আবার চেষ্টা করুন।</string>
+    <string name="reader_progress_description">অধ্যায়ের কতটুকু পড়া হয়েছে</string>
+
+    <!-- Writer -->
+    <string name="writer_role">লেখিকা</string>
+    <string name="writer_name">শাহরিন ছিদ্দিকা</string>
+    <string name="writer_initial">শ</string>
+    <string name="writer_label_father">বাবা</string>
+    <string name="writer_father">হাফেজ হাজী মোহাম্মদ ঈসমাইল সাওদাগর (মৃত)</string>
+    <string name="writer_label_mother">মা</string>
+    <string name="writer_mother">আয়েশা ছিদ্দিকা</string>
+    <string name="writer_label_siblings">ভাই-বোন</string>
+    <string name="writer_siblings">তিন ভাই, বোন নেই</string>
+    <string name="writer_label_education">শিক্ষাগত যোগ্যতা</string>
+    <string name="writer_education">HSC সম্পন্ন এবং Bangladesh Islamic Online Madrasha-এর শিক্ষার্থী</string>
+    <string name="writer_label_permanent_address">স্থায়ী ঠিকানা</string>
+    <string name="writer_permanent_address">সাতকানিয়া, চট্টগ্রাম</string>
+    <string name="writer_label_present_address">বর্তমান ঠিকানা</string>
+    <string name="writer_present_address">আনোয়ারা, চট্টগ্রাম</string>
+    <string name="writer_message_title">লেখিকার কথা</string>
+    <string name="writer_message">আমার অনুভূতিগুলো পড়ে কারো যদি মতের অমিল হয় বা এই বিষয়ে কিছু বলার প্রয়োজন হয়, তবে অবশ্যই যোগাযোগ করবেন।</string>
+    <string name="writer_contact">ফেসবুকে যোগাযোগ করুন</string>
+    <string name="writer_facebook_url" translatable="false">https://www.facebook.com/tahamina.siddeka</string>
+    <string name="writer_salam" translatable="false">اَلسَّلاَمُ عَلَيْكُمْ</string>
+    <string name="writer_closing">আল্লাহ্‌ই সর্বাধিক জ্ঞানী। ওয়া সাল্লাল্লাহু আলা নাবিয়্যিনা মুহাম্মাদ ওয়া আলিহি ওয়া সাহবিহি আজমাঈন।</string>
+
+    <!-- About -->
+    <string name="about_version">সংস্করণ %1$s</string>
+    <string name="about_description">মুসলিম অভিভাবকদের জন্য একটি ছোট্ট বই — সন্তানের চরিত্র গঠন, শিক্ষা ও ভবিষ্যৎ নিয়ে সহজ ভাষায় দশটি অধ্যায়। ইন্টারনেট ছাড়াই পড়া যায়।</string>
+    <string name="about_appearance">অ্যাপের রং</string>
+    <string name="about_theme_system">ফোনের মতো</string>
+    <string name="about_theme_light">দিন</string>
+    <string name="about_theme_dark">রাত</string>
+    <string name="about_share">বন্ধুদের সাথে শেয়ার করুন</string>
+    <string name="about_rate">অ্যাপটিকে রেটিং দিন</string>
+    <string name="about_share_text">\"হে মুসলিম অভিভাবক\" বইটি পড়ে দেখুন: %1$s</string>
+    <string name="about_no_app">এটি খোলার মতো কোনো অ্যাপ পাওয়া যায়নি</string>
+    <string name="about_dua">আল্লাহ আমাদের সবাইকে উত্তম অভিভাবক হওয়ার তাওফিক দান করুন। আমিন।</string>
 </resources>
