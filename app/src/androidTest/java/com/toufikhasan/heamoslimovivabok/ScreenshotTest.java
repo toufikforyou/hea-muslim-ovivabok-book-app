@@ -79,7 +79,7 @@ public class ScreenshotTest {
 
     private void capture(String name) throws InterruptedException, IOException {
         InstrumentationRegistry.getInstrumentation().waitForIdleSync();
-        Thread.sleep(1500);
+        Thread.sleep(2500);
         Bitmap bitmap = InstrumentationRegistry.getInstrumentation().getUiAutomation().takeScreenshot();
         File dir = new File(context.getFilesDir(), "screens");
         if (!dir.isDirectory() && !dir.mkdirs()) {
