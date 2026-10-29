@@ -3,6 +3,10 @@ name: GitHub Release Automation
 on:
   push:
     branches: [main]
+  # Pull requests into main run the whole pipeline as a dry run (build + sign, no release),
+  # so a broken release is caught before it is merged.
+  pull_request:
+    branches: [main]
 
 jobs:
   test:
@@ -81,9 +85,9 @@ jobs:
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v3
-
-      - name: Install Android Build Tools for signing
-        run: sdkmanager "build-tools;36.0.0"
+        with:
+          # The default list includes the obsolete 'tools' package, which no longer exists.
+          packages: 'platform-tools build-tools;36.0.0'
 
       - name: Build APK
         run: ./gradlew assembleRelease
@@ -137,7 +141,18 @@ jobs:
           echo "Files in app directory:"
           ls -la app/
 
+      - name: Upload signed builds (dry run)
+        if: github.event_name == 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: signed-release-dry-run
+          path: |
+            ${{ steps.sign_abb.outputs.signedReleaseFile }}
+            ${{ steps.sign_app.outputs.signedReleaseFile }}
+          if-no-files-found: error
+
       - name: Create GitHub Release
+        if: github.event_name == 'push'
         id: create_release
         uses: softprops/action-gh-release@v2
         with:
