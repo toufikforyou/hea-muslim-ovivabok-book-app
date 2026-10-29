@@ -2,6 +2,7 @@
 # Runs the instrumented smoke test on the running emulator and pulls its screenshots.
 set -u
 PKG=$(grep -oE 'applicationId *=? *"[^"]+"' app/build.gradle* | grep -oE '"[^"]+"' | tr -d '"')
+chmod +x gradlew
 adb logcat -c || true
 ./gradlew --no-daemon connectedDebugAndroidTest -Pandroid.injected.androidTest.leaveApksInstalledAfterRun=true
 status=$?
