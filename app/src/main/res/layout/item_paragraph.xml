@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:breakStrategy="high_quality"
+    android:fontFamily="@font/bangla_font"
+    android:hyphenationFrequency="normal"
+    android:lineSpacingMultiplier="1.45"
+    android:paddingVertical="7dp"
+    android:textSize="19sp" />

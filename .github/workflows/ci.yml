@@ -12,19 +12,41 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  probe:
-    name: Latest dependency versions
+  build:
+    name: Lint, test and build
     runs-on: ubuntu-latest
     steps:
-      - name: Query Google Maven / Maven Central
-        run: |
-          latest() { curl -sSL "$1/maven-metadata.xml" | grep -oP '(?<=<version>)[^<]+' | grep -viE 'alpha|beta|rc|dev' | sort -V | tail -1; }
-          G=https://dl.google.com/dl/android/maven2
-          for a in com/android/tools/build/gradle com/google/android/material/material androidx/appcompat/appcompat \
-                   androidx/constraintlayout/constraintlayout androidx/navigation/navigation-fragment androidx/core/core-splashscreen \
-                   androidx/recyclerview/recyclerview androidx/activity/activity androidx/core/core androidx/preference/preference \
-                   androidx/test/ext/junit androidx/test/espresso/espresso-core androidx/webkit/webkit androidx/coordinatorlayout/coordinatorlayout; do
-            echo "$a = $(latest $G/$a)"; done
-          echo "junit = $(latest https://repo1.maven.org/maven2/junit/junit)"
-          echo "AGP all:"; curl -sSL $G/com/android/tools/build/gradle/maven-metadata.xml | grep -oP '(?<=<version>)[^<]+' | tail -15
-          ls /usr/local/lib/android/sdk/platforms /usr/local/lib/android/sdk/build-tools
+      - uses: actions/checkout@v5
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v5
+        with:
+          distribution: 'temurin'
+          java-version: 21
+          cache: 'gradle'
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Lint
+        run: ./gradlew --no-daemon lintDebug
+
+      - name: Unit tests
+        run: ./gradlew --no-daemon testDebugUnitTest
+
+      - name: Build debug APK and release bundle
+        run: ./gradlew --no-daemon assembleDebug assembleRelease bundleRelease
+
+      - name: Upload debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-debug
+          path: app/build/outputs/apk/debug/*.apk
+
+      - name: Upload lint report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lint-report
+          path: app/build/reports/lint-results-debug.html
+          if-no-files-found: ignore

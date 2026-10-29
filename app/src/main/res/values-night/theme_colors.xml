@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Material 3 color scheme (dark) -->
+    <color name="app_primary">#95CCFF</color>
+    <color name="app_on_primary">#003352</color>
+    <color name="app_primary_container">#004A74</color>
+    <color name="app_on_primary_container">#CDE5FF</color>
+    <color name="app_secondary">#B9C8DA</color>
+    <color name="app_secondary_container">#3A4857</color>
+    <color name="app_on_secondary_container">#D5E4F7</color>
+    <color name="app_tertiary">#FFB95C</color>
+    <color name="app_tertiary_container">#6A4300</color>
+    <color name="app_on_tertiary_container">#FFDDB3</color>
+    <color name="app_error">#FFB4AB</color>
+    <color name="app_surface">#111412</color>
+    <color name="app_on_surface">#E2E3DE</color>
+    <color name="app_surface_variant">#414942</color>
+    <color name="app_on_surface_variant">#C1C9C1</color>
+    <color name="app_outline">#8B938B</color>
+    <color name="app_outline_variant">#414942</color>
+    <color name="app_surface_container_lowest">#0C0F0D</color>
+    <color name="app_surface_container_low">#1A1C1A</color>
+    <color name="app_surface_container">#1E201E</color>
+    <color name="app_surface_container_high">#282B28</color>
+    <color name="app_surface_container_highest">#333533</color>
+</resources>

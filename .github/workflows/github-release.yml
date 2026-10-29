@@ -9,20 +9,20 @@ jobs:
     name: Unit Tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
+      - name: Set up JDK 21
+        uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
-          java-version: 17
+          java-version: 21
           cache: 'gradle'
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
       - name: Run unit tests
-        run: ./gradlew clean test
+        run: ./gradlew --no-daemon clean test
 
   build-and-deploy-to-github:
     name: Build and GitHub Release
@@ -31,17 +31,20 @@ jobs:
     permissions:
       contents: write
       packages: write
+    env:
+      # Build tools already installed on the GitHub runner, used to align and sign
+      BUILD_TOOLS_VERSION: "36.0.0"
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
+      - name: Set up JDK 21
+        uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
-          java-version: 17
+          java-version: 21
           cache: 'gradle'
 
       - name: Grant execute permission for gradlew
@@ -59,37 +62,38 @@ jobs:
           # Get the current year and month in YY.MM format
           YEAR_MONTH=$(date +'%y.%m')
 
-          # Count number of tags that start with the current YY.MM
-          TAG_COUNT=$(git tag -l "$YEAR_MONTH.*" | wc -l)
+          # Count number of release tags (vYY.MM.*) created this month
+          TAG_COUNT=$(git tag -l "v$YEAR_MONTH.*" | wc -l)
           # Increment tag count by 1 (or set to 1 if no matching tags exist)
           TAG_VERSION=$((TAG_COUNT + 1))
 
-          # Create version name in format YY.MM.TAG.VERSION_CODE
+          # Create version name in format YY.MM.TAG.RUN_NUMBER
           VERSION_NAME="${YEAR_MONTH}.${TAG_VERSION}.${{ github.run_number }}"
+
+          # Version code must always grow and stay above the codes already published (<= 4)
+          VERSION_CODE=$(( ${{ github.run_number }} + 100 ))
 
           echo "year_month=$YEAR_MONTH" >> $GITHUB_OUTPUT
           echo "tag_version=$TAG_VERSION" >> $GITHUB_OUTPUT
           echo "version_name=$VERSION_NAME" >> $GITHUB_OUTPUT
-          echo "Version name: $VERSION_NAME"
+          echo "version_code=$VERSION_CODE" >> $GITHUB_OUTPUT
+          echo "Version name: $VERSION_NAME, version code: $VERSION_CODE"
 
       - name: Version Bump
         uses: chkfung/android-version-actions@v1.2.3
         with:
           gradlePath: app/build.gradle
-          versionCode: ${{ github.run_number }}
+          versionCode: ${{ steps.version.outputs.version_code }}
           versionName: ${{ steps.version.outputs.version_name }}
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v2
-
       - name: Build APK
-        run: ./gradlew assembleRelease
+        run: ./gradlew --no-daemon assembleRelease
 
       - name: Copy APK to release directory
         run: cp app/build/outputs/apk/release/*.apk app/release/apk/app-release.apk
 
       - name: Build ABB
-        run: ./gradlew bundleRelease
+        run: ./gradlew --no-daemon bundleRelease
 
       - name: Copy ABB to release directory
         run: cp app/build/outputs/bundle/release/*.aab app/release/abb/app-release.aab
@@ -104,9 +108,6 @@ jobs:
           keyStorePassword: ${{ secrets.ANDROID_SIGNING_KEYSTORE_PASSWORD }}
           keyPassword: ${{ secrets.ANDROID_SIGNING_KEY_ALIAS_PASSWORD }}
 
-      - name: Install Android Build Tools 29.0.3
-        run: sdkmanager "build-tools;29.0.3"
-
       - name: Sign Android Release (APK)
         uses: r0adkll/sign-android-release@v1
         id: sign_app
@@ -117,34 +118,22 @@ jobs:
           keyStorePassword: ${{ secrets.ANDROID_SIGNING_KEYSTORE_PASSWORD }}
           keyPassword: ${{ secrets.ANDROID_SIGNING_KEY_ALIAS_PASSWORD }}
 
-      - name: Copy signed apk and abb to release directory
+      - name: List release files
         run: |
-          cp app/release/apk/app-release-signed.apk app/release/app-release.apk
-          cp ${{ steps.sign_abb.outputs.signedReleaseFile }} app/release/app-release.aab
-
-      - name: Debug Release Files
-        run: |
-          echo "SIGNED_RELEASE_FILE: app/release/app-release.abb"
-          echo "SIGNED_RELEASE_FILE: app/release/app-release.apk"
-          echo "Files in app/release/abb:"
-          ls -la app/release/apk/
-          ls -la app/release/abb/
-          ls -la app/release/
-          echo "Files in app directory:"
-          ls -la app/
+          ls -la app/release/apk/ app/release/abb/
 
       - name: Create GitHub Release
         id: create_release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ steps.version.outputs.version_name }}
           name: v${{ steps.version.outputs.version_name }}
           draft: false
-          release: false
+          prerelease: false
+          generate_release_notes: true
           body: |
-            Release version ${{ steps.version.outputs.version_name }}
-            
-            Changes in this release:
+            Release version ${{ steps.version.outputs.version_name }} (version code ${{ steps.version.outputs.version_code }})
+
             - Automatic build from GitHub Actions
             - Build number: ${{ github.run_number }}
             - Year.Month: ${{ steps.version.outputs.year_month }}
