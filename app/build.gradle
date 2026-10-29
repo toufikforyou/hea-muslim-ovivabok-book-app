@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId = "com.shahrinsiddeka.heamoslimovivabok"
-        minSdk = 23
+        minSdk = 24
         targetSdk = 36
         // Keep the space syntax below: the release workflow rewrites these two lines.
         versionCode 5
