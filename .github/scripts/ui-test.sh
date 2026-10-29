@@ -3,6 +3,11 @@
 set -u
 PKG=$(grep -oE 'applicationId *=? *"[^"]+"' app/build.gradle* | grep -oE '"[^"]+"' | tr -d '"')
 chmod +x gradlew
+# Fresh emulators often show "System UI / Launcher isn't responding" dialogs that steal focus.
+adb shell settings put global hide_error_dialogs 1 || true
+sleep 15
+adb shell am broadcast -a android.intent.action.CLOSE_SYSTEM_DIALOGS >/dev/null 2>&1 || true
+adb shell input keyevent KEYCODE_HOME || true
 adb logcat -c || true
 ./gradlew --no-daemon connectedDebugAndroidTest -Pandroid.injected.androidTest.leaveApksInstalledAfterRun=true
 status=$?
