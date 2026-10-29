@@ -81,7 +81,7 @@ jobs:
           disable-animations: true
           script: |
             chmod +x gradlew
-            ./gradlew --no-daemon connectedDebugAndroidTest
+            ./gradlew --no-daemon connectedDebugAndroidTest -Pandroid.injected.androidTest.leaveApksInstalledAfterRun=true
             mkdir -p screens
             PKG=$(grep -oE 'applicationId *=? *"[^"]+"' app/build.gradle* | grep -oE '"[^"]+"' | tr -d '"'); adb exec-out run-as $PKG tar c -C files screens | tar x -C .
 
