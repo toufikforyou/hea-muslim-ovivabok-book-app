@@ -54,6 +54,8 @@ jobs:
   ui-test:
     name: Emulator smoke test and screenshots
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v5
@@ -90,3 +92,14 @@ jobs:
             screens/
             app/build/reports/androidTests/
           if-no-files-found: warn
+
+      - name: Publish screenshots for review (temporary)
+        if: always() && github.event_name == 'push'
+        run: |
+          [ -d screens ] || exit 0
+          cd screens
+          git init -q -b ci-screenshots
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A && git commit -qm "Screenshots for ${GITHUB_SHA::7}"
+          git push -qf "https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}" ci-screenshots

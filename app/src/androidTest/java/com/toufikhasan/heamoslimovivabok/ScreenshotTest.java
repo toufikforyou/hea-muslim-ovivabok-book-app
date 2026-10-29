@@ -3,12 +3,15 @@ package com.toufikhasan.heamoslimovivabok;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.core.app.ActivityScenario;
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -45,9 +48,10 @@ public class ScreenshotTest {
             capture("03_reader");
             onView(withId(R.id.action_text_settings)).perform(click());
             capture("04_reader_settings");
+            onView(withId(R.id.textSizeSlider)).check(matches(isDisplayed()));
             pressBack();
-            onView(withId(R.id.recyclerView)).perform(androidx.test.espresso.action.ViewActions.swipeUp());
-            onView(withId(R.id.recyclerView)).perform(androidx.test.espresso.action.ViewActions.swipeUp());
+            // Scroll in code: a swipe starting at the bottom edge would trigger the system home gesture.
+            reader.onActivity(activity -> ((RecyclerView) activity.findViewById(R.id.recyclerView)).scrollBy(0, 2500));
             capture("05_reader_scrolled");
         }
 
